@@ -9,26 +9,22 @@ MAINTAINER=	lukejee@gmail.com
 COMMENT=	Go Versioning Manager
 
 LICENSE=	MIT
+LICENSE_FILE=	${WRKSRC}/LICENCE
 
 RUN_DEPENDS=	bash:${PORTSDIR}/shells/bash \
-				go:${PORTSDIR}/lang/go
+		go:${PORTSDIR}/lang/go
 
-USE_GITHUB= yes
-GH_ACCOUNT= pote
-GH_PROJECT= gvp
-GH_TAGNAME= 8bcab74
+USE_GITHUB=	yes
+GH_ACCOUNT=	pote
+GH_TAGNAME=	8bcab74
 
-ONLY_FOR_ARCHS=	amd64 i386
+NO_BUILD=	yes
 
-PLIST_FILES= bin/gvp
+NO_ARCH=	yes
 
-.include <bsd.port.pre.mk>
+PLIST_FILES=	bin/gvp
 
 do-install:
 	${INSTALL_SCRIPT} ${WRKSRC}/bin/gvp ${STAGEDIR}${PREFIX}/bin/
 
-post-patch:
-	@${REINPLACE_CMD} -e \
-		's|/bin/bash|${PREFIX}/bin/bash|' ${WRKSRC}/bin/gvp
-
-.include <bsd.port.post.mk>
+.include <bsd.port.mk>
